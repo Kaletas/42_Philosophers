@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/09/22 22:58:44 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/09/23 21:35:15 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ typedef struct s_all_data
 
 // error_handlig.c
 void	error_exit(const char *error);
+
+// parsing_input.c
+void	parse_input(t_all_data *all_data, char **av);
 
 #endif
