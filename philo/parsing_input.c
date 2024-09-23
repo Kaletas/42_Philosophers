@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:03:53 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/09/23 21:34:48 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/09/23 22:32:29 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static const char	*valid_input(const char *str)
 	const char	*number;
 
 	len = 0;
-	while (is_space)
+	while (is_space(*str))
 		++str;
 	if (*str == '+')
 		++str;
@@ -53,6 +53,7 @@ static long	ft_atol(const char *str)
 	while (is_digit(*str))
 	{
 		result = (result * 10) + (*str - '0');
+		str++;
 	}
 	if (result > INT_MAX)
 		error_exit("DONT BE GREEDY! INT_MAX IS THE LIMIT FOR THIS!");
