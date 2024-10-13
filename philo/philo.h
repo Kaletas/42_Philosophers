@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/09/23 21:35:15 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/13 22:55:06 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include <stdbool.h> // bools
 # include <sys/time.h> // gettimeofday
 # include <limits.h> // limts such as INT_MAX & INT_MIN
+# include <errno.h>
+
+typedef enum e_opcode
+{
+	LOCK = 0,
+	UNLOCK = 1,
+	INIT = 2,
+	DESTROY = 3,
+	CREATE = 4,
+	JOIN = 5,
+	DETACH = 6,
+}			t_opcode;
 
 typedef pthread_mutex_t		t_mutex;
 
@@ -61,5 +73,12 @@ void	error_exit(const char *error);
 
 // parsing_input.c
 void	parse_input(t_all_data *all_data, char **av);
+
+// data_init.c
+void	data_init(t_all_data *all_data);
+
+// mutex_handle.c
+void	*safe_malloc(size_t bytes);
+void	safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
 
 #endif
