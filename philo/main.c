@@ -6,11 +6,13 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 22:48:51 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/09/23 22:32:49 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/15 22:40:06 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// ./philo 5 800 200 200 [5]
 
 int	main(int ac, char **av)
 {
@@ -19,7 +21,7 @@ int	main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		parse_input(&all_data, av);
-		//data_init(&all_data);
+		data_init(&all_data);
 		//feast_begin(&all_data);
 		//free_all(&all_data);
 	}

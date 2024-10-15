@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/13 22:55:06 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/15 23:17:55 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ typedef struct s_all_data
 	long	meals_limit;
 	long	start;
 	bool	end; // Philo dead or Philos full
+	bool	all_threads_ready;
+	t_mutex	all_mutexes;
 	t_fork	*forks; // Array of forks
-	t_fork	*philos; // Array of philos
+	t_philo	*philos; // Array of philos
 }	t_all_data;
 
 // error_handlig.c
@@ -80,5 +82,19 @@ void	data_init(t_all_data *all_data);
 // mutex_handle.c
 void	*safe_malloc(size_t bytes);
 void	safe_mutex_handle(t_mutex *mutex, t_opcode opcode);
+
+// threads_handle.c
+void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
+			void *data, t_opcode opcode);
+
+// dinner.c
+void	feast_begin(t_all_data *all_data);
+
+// set_get.c
+void	set_bool(t_mutex *mutex, bool *dest, bool value);
+bool	get_bool(t_mutex *mutex, bool *value);
+long	get_long(t_mutex *mutex, long *value);
+void	set_long(t_mutex *mutex, long *dest, long value);
+bool	sim_finished(t_all_data *all_data);
 
 #endif
