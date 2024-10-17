@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 19:38:15 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 19:51:41 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 20:31:38 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,27 @@ long	gettime(t_time_code time_code)
 	else
 		error_exit("Wrong input to gettime");
 	return (42);
+}
+
+void	precise_usleep(long usec, t_all_data *all_data)
+{
+	long	start;
+	long	elapsed;
+	long	remaining;
+
+	start = gettime(MICROSECOND);
+	while (gettime(MICROSECOND) - start < usec)
+	{
+		if (sim_finished(all_data))
+			break ;
+		elapsed = gettime(MICROSECOND) - start;
+		remaining = usec - elapsed;
+		if (remaining > 1e3)
+			usleep(remaining / 2);
+		else
+		{
+			while (gettime(MICROSECOND) - start < usec)
+				;
+		}
+	}
 }

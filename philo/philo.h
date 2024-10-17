@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 19:56:20 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 21:13:10 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # include <sys/time.h> // gettimeofday
 # include <limits.h> // limts such as INT_MAX & INT_MIN
 # include <errno.h>
+
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}			t_philo_status;
 
 typedef enum e_time_code
 {
@@ -73,6 +83,7 @@ typedef struct s_all_data
 	bool	end; // Philo dead or Philos full
 	bool	all_threads_ready;
 	t_mutex	all_mutexes;
+	t_mutex	write_mutex;
 	t_fork	*forks; // Array of forks
 	t_philo	*philos; // Array of philos
 }	t_all_data;
@@ -107,5 +118,8 @@ bool	sim_finished(t_all_data *all_data);
 // utils.c
 void	wait_all_threads(t_all_data *all_data);
 long	gettime(t_time_code time_code);
+void	precise_usleep(long usec, t_all_data *all_data);
+
+// write.c
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:39:20 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 19:59:23 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 20:23:20 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static void	*dinner_simulation(void *data)
 
 	philo = (t_philo *)data;
 	wait_all_threads(philo->all_data);
+	while (!sim_finished(philo->all_data))
+	{
+		if (philo->full)
+			break ;
+		eat(philo);
+		//sleep
+		thinking(philo);
+	}
 	return (NULL);
 }
 
