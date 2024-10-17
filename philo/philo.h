@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 23:53:15 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/18 00:31:37 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_all_data
 
 // error_handlig.c
 void	error_exit(const char *error);
+void	de_synchro_philos(t_philo *philo);
 
 // parsing_input.c
 void	parse_input(t_all_data *all_data, char **av);
@@ -119,6 +120,7 @@ void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 
 // dinner.c
 void	feast_begin(t_all_data *all_data);
+void	thinking(t_philo *philo, bool value);
 
 // set_get.c
 void	set_bool(t_mutex *mutex, bool *dest, bool value);
@@ -141,5 +143,6 @@ void	write_status(t_philo_status status, t_philo *philo, bool debug);
 void	*monitor_dinner(void *data);
 
 // free.c
+void	free_all(t_all_data *all_data);
 
 #endif

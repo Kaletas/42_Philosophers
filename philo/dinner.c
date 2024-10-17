@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:39:20 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 23:52:35 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/18 00:30:14 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,22 @@ static void	eat(t_philo *philo)
 	safe_mutex_handle(&philo->right_fork->fork, UNLOCK);
 }
 
-static void	thinking(t_philo *philo)
+void	thinking(t_philo *philo, bool value)
 {
-	write_status(THINKING, philo, DEBUG_MODE);
+	long	t_eat;
+	long	t_sleep;
+	long	t_think;
+
+	if (!value)
+		write_status(THINKING, philo, DEBUG_MODE);
+	if (philo->all_data->philo_number % 2 == 0)
+		return ;
+	t_eat = philo->all_data->time_to_eat;
+	t_sleep = philo->all_data->time_to_sleep;
+	t_think = t_eat * 2 - t_sleep;
+	if (t_think < 0)
+		t_think = 0;
+	precise_usleep(t_think * 0.42, philo->all_data);
 }
 
 void	*lone_philo(void *arg)
@@ -59,6 +72,7 @@ static void	*dinner_simulation(void *data)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILLISECOND));
 	increse_long(&philo->all_data->all_mutexes,
 		&philo->all_data->threads_running_nbr);
+	de_synchro_philos(philo);
 	while (!sim_finished(philo->all_data))
 	{
 		if (philo->full)
@@ -66,7 +80,7 @@ static void	*dinner_simulation(void *data)
 		eat(philo);
 		write_status(SLEEPING, philo, DEBUG_MODE);
 		precise_usleep(philo->all_data->time_to_sleep, philo->all_data);
-		thinking(philo);
+		thinking(philo, false);
 	}
 	return (NULL);
 }
