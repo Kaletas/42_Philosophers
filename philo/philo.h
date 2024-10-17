@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/15 23:17:55 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 19:45:55 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include <sys/time.h> // gettimeofday
 # include <limits.h> // limts such as INT_MAX & INT_MIN
 # include <errno.h>
+
+typedef enum e_time_code
+{
+	SECOND,
+	MILLISECOND,
+	MICROSECOND,
+}			t_time_code;
 
 typedef enum e_opcode
 {
@@ -96,5 +103,8 @@ bool	get_bool(t_mutex *mutex, bool *value);
 long	get_long(t_mutex *mutex, long *value);
 void	set_long(t_mutex *mutex, long *dest, long value);
 bool	sim_finished(t_all_data *all_data);
+
+// utils.c
+void	wait_all_threads(t_all_data *all_data);
 
 #endif

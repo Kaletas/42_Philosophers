@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:26:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/13 22:55:12 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 19:33:05 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ static	void	handle_mutex_error(int status, t_opcode opcode)
 		error_exit("The value specifed by mutex is invalid.");
 	else if (EINVAL == status && INIT == opcode)
 		error_exit("The value specifed by attr is invalid.");
+	else if (EINVAL == status && DESTROY == opcode)
+		error_exit("The mutex to be destroyed is invalid or not initialized.");
 	else if (EDEADLK == status)
 		error_exit("A DL would occur if the thread blocked waiting mutex.");
 	else if (EPERM == status)
 		error_exit("The current thread does not hold lock on mutex.");
 	else if (ENOMEM == status)
 		error_exit("Cannot allocate mem to create another mutex.");
-	else if (EBUSY == status)
+	else if (EBUSY == status && (LOCK == opcode || DESTROY == opcode))
 		error_exit("Mutex is locked.");
 }
 
