@@ -8,7 +8,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
 
 # Pliki źródłowe
-SRCS = main.c data_init.c dinner.c error_handling.c parsing_input.c mutex_handle.c set_get.c threads_handle.c utils.c write.c monitor.c
+SRCS = main.c data_init.c dinner.c error_handling.c parsing_input.c mutex_handle.c set_get.c threads_handle.c utils.c write.c monitor.c free.c
 
 # Pliki nagłówkowe
 HEADERS = philo.h

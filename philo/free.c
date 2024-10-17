@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 22:48:51 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 23:53:54 by bkaleta          ###   ########.fr       */
+/*   Created: 2024/10/17 23:53:28 by bkaleta           #+#    #+#             */
+/*   Updated: 2024/10/17 23:56:43 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// ./philo 5 800 200 200 [5]
-
-int	main(int ac, char **av)
+void	free_all(t_all_data *all_data)
 {
-	t_all_data	all_data;
+	t_philo	*philo;
+	int		i;
 
-	if (ac == 5 || ac == 6)
+	i = -1;
+	while (++i < all_data->philo_number)
 	{
-		parse_input(&all_data, av);
-		data_init(&all_data);
-		feast_begin(&all_data);
-		free_all(&all_data);
+		philo = all_data->philos + i;
+		safe_mutex_handle(&philo->philo_mutex, DESTROY)
 	}
-	else
-	{
-		error_exit("Correct input: ./philo 42 800 200 200 [5]'");
-	}
-	return (0);
 }

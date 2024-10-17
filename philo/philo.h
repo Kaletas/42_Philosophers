@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 23:38:20 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:53:15 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,7 @@ void	write_status(t_philo_status status, t_philo *philo, bool debug);
 
 // monitor.c
 void	*monitor_dinner(void *data);
+
+// free.c
 
 #endif

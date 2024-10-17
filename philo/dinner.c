@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 22:39:20 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 23:46:09 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:52:35 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ void	feast_begin(t_all_data *all_data)
 	while (++i < all_data->philo_number)
 		safe_thread_handle(&all_data->philos[i].thread_id, NULL, NULL, JOIN);
 	set_bool(&all_data->all_mutexes, &all_data->end, true);
+	safe_thread_handle(&all_data->monitor, NULL, NULL, JOIN);
 }
