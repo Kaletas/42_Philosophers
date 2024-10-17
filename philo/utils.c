@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 19:38:15 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 20:31:38 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:18:41 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,23 @@ void	precise_usleep(long usec, t_all_data *all_data)
 				;
 		}
 	}
+}
+
+bool	all_threads_running(t_mutex *mutex, long *threads, long philo_nbr)
+{
+	bool	ret;
+
+	ret = false;
+	safe_mutex_handle(mutex, LOCK);
+	if (*threads == philo_nbr)
+		ret = true;
+	safe_mutex_handle(mutex, UNLOCK);
+	return (ret);
+}
+
+void	increse_long(t_mutex *mutex, long *value)
+{
+	safe_mutex_handle(mutex, LOCK);
+	(*value)++;
+	safe_mutex_handle(mutex, UNLOCK);
 }

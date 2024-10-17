@@ -6,13 +6,13 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:52:36 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/13 23:03:45 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 22:57:04 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	handle_threads_error(int status, t_opcode opcode)
+static void	handle_thread_error(int status, t_opcode opcode)
 {
 	if (0 == status)
 		return ;

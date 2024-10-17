@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 22:48:51 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/15 22:40:06 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 22:57:51 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	{
 		parse_input(&all_data, av);
 		data_init(&all_data);
-		//feast_begin(&all_data);
+		feast_begin(&all_data);
 		//free_all(&all_data);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:21:50 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 20:45:46 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:13:55 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	philo_init(t_all_data *all_data)
 		philo->full = false;
 		philo->meals_counter = 0;
 		philo->all_data = all_data;
+		safe_mutex_handle(&philo->philo_mutex, INIT);
 		assign_forks(philo, all_data->forks, i);
 	}
 }
@@ -50,9 +51,10 @@ void	data_init(t_all_data *all_data)
 	i = -1;
 	all_data->end = false;
 	all_data->all_threads_ready = false;
+	all_data->threads_running_nbr = 0;
 	all_data->philos = safe_malloc(sizeof(t_philo) * all_data->philo_number);
 	safe_mutex_handle(&all_data->all_mutexes, INIT);
-	safe_mutex_handle(&all_data->write_lock, INIT);
+	safe_mutex_handle(&all_data->write_mutex, INIT);
 	all_data->forks = safe_malloc(sizeof(t_fork) * all_data->philo_number);
 	while (++i < all_data->philo_number)
 	{

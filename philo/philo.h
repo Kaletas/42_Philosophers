@@ -6,12 +6,21 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 21:13:10 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 23:38:20 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+# define DEBUG_MODE 1
+# define RST		"\033[0m"
+# define RED		"\033[1;31m"
+# define G			"\033[1;32m"
+# define Y			"\033[1;33m"
+# define B			"\033[1;34m"
+# define M			"\033[1;35m"
+# define C			"\033[1;36m"
+# define W			"\033[1;37m"
 
 # include <stdio.h> // printf
 # include <stdlib.h> // malloc & free
@@ -69,23 +78,26 @@ typedef struct s_philo
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	pthread_t	thread_id;
+	t_mutex		philo_mutex;
 	t_all_data	*all_data;
 }	t_philo;
 
 typedef struct s_all_data
 {
-	long	philo_number;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	meals_limit;
-	long	start;
-	bool	end; // Philo dead or Philos full
-	bool	all_threads_ready;
-	t_mutex	all_mutexes;
-	t_mutex	write_mutex;
-	t_fork	*forks; // Array of forks
-	t_philo	*philos; // Array of philos
+	long		philo_number;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		meals_limit;
+	long		start;
+	long		threads_running_nbr;
+	bool		end; // Philo dead or Philos full
+	bool		all_threads_ready;
+	t_mutex		all_mutexes;
+	t_mutex		write_mutex;
+	pthread_t	monitor;
+	t_fork		*forks; // Array of forks
+	t_philo		*philos; // Array of philos
 }	t_all_data;
 
 // error_handlig.c
@@ -119,7 +131,13 @@ bool	sim_finished(t_all_data *all_data);
 void	wait_all_threads(t_all_data *all_data);
 long	gettime(t_time_code time_code);
 void	precise_usleep(long usec, t_all_data *all_data);
+bool	all_threads_running(t_mutex *mutex, long *threads, long philo_nbr);
+void	increse_long(t_mutex *mutex, long *value);
 
 // write.c
+void	write_status(t_philo_status status, t_philo *philo, bool debug);
+
+// monitor.c
+void	*monitor_dinner(void *data);
 
 #endif
