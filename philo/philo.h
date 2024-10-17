@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 21:27:23 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 19:45:55 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/17 19:56:20 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ bool	sim_finished(t_all_data *all_data);
 
 // utils.c
 void	wait_all_threads(t_all_data *all_data);
+long	gettime(t_time_code time_code);
 
 #endif
