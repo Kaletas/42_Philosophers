@@ -6,7 +6,7 @@
 /*   By: bkaleta <bkaleta@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 23:09:19 by bkaleta           #+#    #+#             */
-/*   Updated: 2024/10/17 23:41:03 by bkaleta          ###   ########.fr       */
+/*   Updated: 2024/10/20 20:18:23 by bkaleta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*monitor_dinner(void *data)
 		;
 	while (!sim_finished(all_data))
 	{
-		i = 1;
+		i = -1;
 		while (++i < all_data->philo_number && !sim_finished(all_data))
 		{
 			if (philo_died(all_data->philos + i))
